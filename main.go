@@ -12,6 +12,7 @@ import (
 
 func main() {
 	// Routers
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
 	// Middleware
@@ -29,7 +30,7 @@ func main() {
 
 	// CORS settings
 	corsOptions := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://127.0.0.1:5173", "http://localhost:5173"},
+		AllowedOrigins:   []string{"http://127.0.0.1:5173", "http://localhost:5173", "0.0.0.0", "trietandfriends.site"},
 		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodPatch, http.MethodPut},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
@@ -37,9 +38,5 @@ func main() {
 	handler := corsOptions.Handler(router)
 
 	// Server
-	err := http.ListenAndServe("localhost:8080", handler)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
+	log.Fatal(http.ListenAndServe(":8080", handler))
 }
