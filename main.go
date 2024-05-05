@@ -30,8 +30,8 @@ func main() {
 
 	// CORS settings
 	corsOptions := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://127.0.0.1:5173", "http://localhost:5173", "0.0.0.0", "https://www.trietandfriends.site/"},
-		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodPatch, http.MethodPut},
+		AllowedOrigins:   []string{"http://127.0.0.1:5173", "http://localhost:5173", "https://www.trietandfriends.site/"},
+		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodPatch, http.MethodPut, http.MethodOptions},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	})
