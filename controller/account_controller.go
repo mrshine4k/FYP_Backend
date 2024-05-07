@@ -127,10 +127,10 @@ func LoginHandler() gin.HandlerFunc {
 					Value:    encodedToken,
 					Expires:  time.Now().Add(24 * time.Hour), // Adjust the expiration time as needed
 					HttpOnly: true,
-					Secure:   false,                // Set to true to ensure the cookie is sent only over HTTPS
-					SameSite: http.SameSiteLaxMode, // Set the SameSite attribute for CSRF protection
-					Path:     "/",                  // Set the path attribute to restrict the cookie to a specific path
-					// Domain:   "localhost",          // Set the domain attribute to restrict the cookie to a specific domain
+					Secure:   false,                  // Set to true to ensure the cookie is sent only over HTTPS
+					SameSite: http.SameSiteLaxMode,   // Set the SameSite attribute for CSRF protection
+					Path:     "/",                    // Set the path attribute to restrict the cookie to a specific path
+					Domain:   "trietandfriends.site", // Set the domain attribute to restrict the cookie to a specific domain
 					//removed cause unecessary..?
 				}
 
