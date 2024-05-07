@@ -45,6 +45,6 @@ rm -rf /var/lib/apt/lists/*
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /app/server /app/server
 
-EXPOSE 8080
+EXPOSE 8080:8080
 # Run the web service on container startup.
 CMD ["/app/server", "--host", "0.0.0.0"]

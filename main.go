@@ -3,11 +3,10 @@ package main
 import (
 	"backend/middleware"
 	"backend/routes"
-	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rs/cors"
+	// "github.com/rs/cors"
+	"github.com/gin-contrib/cors"
 )
 
 func main() {
@@ -17,6 +16,13 @@ func main() {
 
 	// Middleware
 	router.Use(middleware.CookieAuth())
+
+	// CORS settings
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowOrigins = []string{"https://www.trietandfriends.site", "http://localhost:5173", "http://127.0.0.1:5173"}
+	corsConfig.AllowCredentials = true
+
+	router.Use(cors.New(corsConfig))
 
 	routes.MainRoute(router)
 	routes.TaskRoute(router)
@@ -28,15 +34,15 @@ func main() {
 	routes.EmployeeRoute(router)
 	routes.MessageRoute(router)
 
-	// CORS settings
-	corsOptions := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://127.0.0.1:5173", "http://localhost:5173", "https://www.trietandfriends.site/"},
-		AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodPatch, http.MethodPut, http.MethodOptions},
-		AllowedHeaders:   []string{"*"},
-		AllowCredentials: true,
-	})
-	handler := corsOptions.Handler(router)
+	// Old CORS settings
+	// corsOptions := cors.New(cors.Options{
+	// 	AllowedOrigins:   []string{"http://127.0.0.1:5173", "http://localhost:5173", "https://www.trietandfriends.site"},
+	// 	AllowedMethods:   []string{http.MethodGet, http.MethodPost, http.MethodDelete, http.MethodPatch, http.MethodPut, http.MethodOptions},
+	// 	AllowedHeaders:   []string{"*"},
+	// 	AllowCredentials: true,
+	// })
+	// handler := corsOptions.Handler(router)
 
 	// Server
-	log.Fatal(http.ListenAndServe(":8080", handler))
+	router.Run()
 }
