@@ -19,8 +19,9 @@ func main() {
 
 	// CORS settings
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowOrigins = []string{"https://www.trietandfriends.site", "http://localhost:5173", "http://127.0.0.1:5173"}
-	corsConfig.AllowCredentials = true
+	corsConfig.AllowOrigins = []string{"http://localhost:5173/", "http://127.0.0.1:5173/", "https://www.trietandfriends.site/", "https://www.trietandfriends.site"}
+	corsConfig.AllowMethods = []string{"GET", "POST", "DELETE", "PATCH", "PUT", "OPTIONS"}
+	corsConfig.AllowHeaders = []string{"*"}
 
 	router.Use(cors.New(corsConfig))
 
